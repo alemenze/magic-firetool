@@ -28,8 +28,7 @@ tagList(tags$head(tags$style(type = 'text/css','.navbar-brand{display:none;}')),
             titlePanel(
                 fluidRow(
                 #column(4, img(height =75 , src = "")), if I ever want a logo in there
-                column(12, h1(strong('MaGIC FIRE-Tool'), align = 'center'))
-                ),
+                column(12, h1(strong('MaGIC FIRE-Tool'), align = 'center')),
                 column(12, h2(strong('Fun Interactive RNA-Seq Analysis Tool'), align = 'center'))
                 ),
                 windowTitle = "MaGIC RNA-Seq" ),
@@ -262,6 +261,7 @@ tagList(tags$head(tags$style(type = 'text/css','.navbar-brand{display:none;}')),
                     column(3,
                         wellPanel(
                             h2("Input Set up", align='center'),
+                            markdown('Example data can be found in the [local repository](https://github.com/alemenze/magic-firetool/tree/main/app/docs)'),
                             hr(),
                             h3("Hit Count File"),
                                                        
