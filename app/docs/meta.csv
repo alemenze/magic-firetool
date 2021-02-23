@@ -1,0 +1,17 @@
+,SampleName,Group,Infected,CellType
+Cell1Fungi3,Cell1Fungi3,Cell1Fungi,Fungi,One
+Cell1Fungi1,Cell1Fungi1,Cell1Fungi,Fungi,One
+Naive1,Naive1,Control,Control,Control
+Cell2Bug2,Cell2Bug2,Cell2Bug,Bug,Two
+Naive2,Naive2,Control,Control,Control
+Cell2Fungi1,Cell2Fungi1,Cell2Fungi,Fungi,Two
+Cell1Bug2,Cell1Bug2,Cell1Bug,Bug,One
+Cell2Fungi2,Cell2Fungi2,Cell2Fungi,Fungi,Two
+Cell1Fungi2,Cell1Fungi2,Cell1Fungi,Fungi,One
+Naive3,Naive3,Control,Control,Control
+Cell2Bug3,Cell2Bug3,Cell2Bug,Bug,Two
+Cell1Bug3,Cell1Bug3,Cell1Bug,Bug,One
+Naive4,Naive4,Control,Control,Control
+Cell2Fungi3,Cell2Fungi3,Cell2Fungi,Fungi,Two
+Cell1Bug1,Cell1Bug1,Cell1Bug,Bug,One
+Cell2Bug1,Cell2Bug1,Cell2Bug,Bug,Two
