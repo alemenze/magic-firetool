@@ -1,6 +1,6 @@
 FROM rocker/shiny:3.6.1
 LABEL authors="Alex Lemenze" \
-    description="Docker image containing the MaGIC RNA-seq Shiny."
+    description="Docker image containing the MaGIC FIRE Tool."
 
 RUN apt-get update && apt-get install -y \ 
     sudo libssl-dev libv8-dev libsodium-dev libxml2-dev \

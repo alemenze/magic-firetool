@@ -24,7 +24,7 @@ library(pathview)
 
 tagList(tags$head(tags$style(type = 'text/css','.navbar-brand{display:none;}')),
     fluidPage(theme = shinytheme('superhero'),
-            windowTitle = "MaGIC RNA-Seq",
+            windowTitle = "MaGIC FIRE-Tool",
             titlePanel(
                 fluidRow(
                 #column(4, img(height =75 , src = "")), if I ever want a logo in there
