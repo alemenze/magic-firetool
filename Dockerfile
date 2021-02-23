@@ -18,6 +18,7 @@ RUN R -e "BiocManager::install('org.Mm.eg.db', character.only = TRUE)"
 RUN R -e "BiocManager::install('org.Hs.eg.db', character.only = TRUE)"
 
 COPY /app /srv/shiny-server/
+COPY shiny-customized.config /etc/shiny-server/shiny-server.conf
 RUN sudo chown -R shiny:shiny /srv/shiny-server
-EXPOSE 3838
+EXPOSE 8080
 CMD ["/usr/bin/shiny-server.sh"]
