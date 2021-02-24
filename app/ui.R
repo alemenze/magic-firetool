@@ -29,7 +29,7 @@ tagList(tags$head(tags$style(type = 'text/css','.navbar-brand{display:none;}')),
                 fluidRow(
                 #column(4, img(height =75 , src = "")), if I ever want a logo in there
                 column(12, h1(strong('MaGIC FIRE-Tool'), align = 'center')),
-                column(12, h2(strong('Fun Interactive RNA-Seq Analysis Tool'), align = 'center'))
+                column(12, h2(strong('Fun Interactive RNA-Seq Expression Tool'), align = 'center'))
                 ),
                 windowTitle = "MaGIC RNA-Seq" ),
                 tags$style(type='text/css', '.navbar{font-size:20px;}'),
@@ -136,113 +136,117 @@ tagList(tags$head(tags$style(type = 'text/css','.navbar-brand{display:none;}')),
                                 style="margin-bottom:75px;",
                                 style="margin-top:45px;",
                                 align='left',
-                                column(6,
-                                    wellPanel(
-                                        style="margin-bottom:15px;",
-                                        style="height:450px;",
-                                        h4('Clustering Visualization'),
-                                        tabsetPanel(
-                                            tabPanel('PCA',
-                                                markdown('PCA is principal component analysis. This is a method of reducing high dimensionality data in to 2D or 3D visualizations. The individual principal components capture the variability across samples, with the primary variability captured in PC1 and PC2.
-                                                    The closer points are, the more similar their (in this case) gene expression profiles are based on the normalized counts. This is often a good quality control step- if your experiment was properly designed and controlled, the samples should clearly cluster by groups. 
-                                                    For more variable samples like human derived, you might expect more variability and not as clear cut a divide. 
-                                                    '),
-                                                actionButton('pca_example','PCA Example',class='btn btn-info',style="margin-top:15px;")
-                                            ),
-                                            tabPanel('Distance Matrices',
-                                                markdown('Distance matrices is another way of measuring sample-to-sample relatedness. Here it will perform euclidean distance between each sample, showing which are more related or more distant.
-                                                    Similar to PCA, this should show the anticipated groupings of your samples. 
-                                                    '),
-                                                actionButton('dm_example','Distance Matrices Example',class='btn btn-info',style="margin-top:15px;")
-                                            ),
-                                            tabPanel('Eigen Correlations',
-                                                markdown('The individual vectors that are used to calculate principal components are called Eigen vectors. For eigen correlation analysis, we will be correlating those vectors with various metadata columns.
-                                                    For smaller experiments this will most likely be skipped, but for more exploratory studies with expansive metadata this can be very helpful. For example, if you have a large patient study with various clinical features (ie- death during study, weight loss, secondary infections), eigen corerlations will help illuminate what metadata effects were driving the variabilty seen in the data. 
-                                                    Do note- this is not meant to replace your sample groupings. You *cannot* replace sample groupings with samples that are more/less similar from output PCA/eigen calculations. This is meant to expand on your sample groupings and provide extra insights. 
-                                                    '),
-                                                actionButton('eigen_example','Eigen Correlations Example',class='btn btn-info',style="margin-top:15px;")
+                                fluidRow(
+                                    column(6,
+                                        wellPanel(
+                                            style="margin-bottom:15px;",
+                                            style="height:100%;",
+                                            h4('Clustering Visualization'),
+                                            tabsetPanel(
+                                                tabPanel('PCA',
+                                                    markdown('PCA is principal component analysis. This is a method of reducing high dimensionality data in to 2D or 3D visualizations. The individual principal components capture the variability across samples, with the primary variability captured in PC1 and PC2.
+                                                        The closer points are, the more similar their (in this case) gene expression profiles are based on the normalized counts. This is often a good quality control step- if your experiment was properly designed and controlled, the samples should clearly cluster by groups. 
+                                                        For more variable samples like human derived, you might expect more variability and not as clear cut a divide. 
+                                                        '),
+                                                    actionButton('pca_example','PCA Example',class='btn btn-info',style="margin-top:15px;")
+                                                ),
+                                                tabPanel('Distance Matrices',
+                                                    markdown('Distance matrices is another way of measuring sample-to-sample relatedness. Here it will perform euclidean distance between each sample, showing which are more related or more distant.
+                                                        Similar to PCA, this should show the anticipated groupings of your samples. 
+                                                        '),
+                                                    actionButton('dm_example','Distance Matrices Example',class='btn btn-info',style="margin-top:15px;")
+                                                ),
+                                                tabPanel('Eigen Correlations',
+                                                    markdown('The individual vectors that are used to calculate principal components are called Eigen vectors. For eigen correlation analysis, we will be correlating those vectors with various metadata columns.
+                                                        For smaller experiments this will most likely be skipped, but for more exploratory studies with expansive metadata this can be very helpful. For example, if you have a large patient study with various clinical features (ie- death during study, weight loss, secondary infections), eigen corerlations will help illuminate what metadata effects were driving the variabilty seen in the data. 
+                                                        Do note- this is not meant to replace your sample groupings. You *cannot* replace sample groupings with samples that are more/less similar from output PCA/eigen calculations. This is meant to expand on your sample groupings and provide extra insights. 
+                                                        '),
+                                                    actionButton('eigen_example','Eigen Correlations Example',class='btn btn-info',style="margin-top:15px;")
+                                                )
+                                            )
+                                        )
+                                    ),
+                                    column(6,
+                                        wellPanel(
+                                            style="margin-bottom:15px;",
+                                            style="height:100%;",
+                                            h4('Comparison Visualizations'),
+                                            tabsetPanel(
+                                                tabPanel('Volcano Plots',
+                                                    markdown('Volcano plots are a staple in RNA-seq analysis. These are meant to visualize the differences seen in your direct comparisons. For example, if you are doing treatment vs control you will be able to see the full spread of each gene- is it higher in treatment, lower in treatment, is it significant etc. 
+                                                        This will only show cross-sample comparisons though on a per-comparison basis. 
+                                                        '),
+                                                    actionButton('volcano_example','Volcano Example',class='btn btn-info',style="margin-top:15px;")
+                                                ),
+                                                tabPanel('Venn Diagrams',
+                                                    markdown('Venn diagrams allow effective visualization across comparisons. For example, if you wanted to see what was most similar between DrugA vs Untreated control and DrugB vs Untreated control, you could see what significant genes overlap using venn diagrams.
+                                                        This is limited in visualization effectiveness though to 5 or less comparisons
+                                                        '),
+                                                    actionButton('venn_example','Venn Diagram Example',class='btn btn-info',style="margin-top:15px;")
+                                                ),
+                                                tabPanel('UpSet Plots',
+                                                    markdown('UpSet plots are an alternative to Venn diagrams that allow expansion beyond 5 comparisons. This shows for each combination what is shared across the comparisons.
+                                                        '),
+                                                    actionButton('upset_example','UpSet Plot Example',class='btn btn-info',style="margin-top:15px;")
+                                                )
                                             )
                                         )
                                     )
                                 ),
-                                column(6,
-                                    wellPanel(
-                                        style="margin-bottom:15px;",
-                                        style="height:450px;",
-                                        h4('Comparison Visualizations'),
-                                        tabsetPanel(
-                                            tabPanel('Volcano Plots',
-                                                markdown('Volcano plots are a staple in RNA-seq analysis. These are meant to visualize the differences seen in your direct comparisons. For example, if you are doing treatment vs control you will be able to see the full spread of each gene- is it higher in treatment, lower in treatment, is it significant etc. 
-                                                    This will only show cross-sample comparisons though on a per-comparison basis. 
-                                                    '),
-                                                actionButton('volcano_example','Volcano Example',class='btn btn-info',style="margin-top:15px;")
-                                            ),
-                                            tabPanel('Venn Diagrams',
-                                                markdown('Venn diagrams allow effective visualization across comparisons. For example, if you wanted to see what was most similar between DrugA vs Untreated control and DrugB vs Untreated control, you could see what significant genes overlap using venn diagrams.
-                                                    This is limited in visualization effectiveness though to 5 or less comparisons
-                                                    '),
-                                                actionButton('venn_example','Venn Diagram Example',class='btn btn-info',style="margin-top:15px;")
-                                            ),
-                                            tabPanel('UpSet Plots',
-                                                markdown('UpSet plots are an alternative to Venn diagrams that allow expansion beyond 5 comparisons. This shows for each combination what is shared across the comparisons.
-                                                    '),
-                                                actionButton('upset_example','UpSet Plot Example',class='btn btn-info',style="margin-top:15px;")
+                                fluidRow(
+                                    column(6,
+                                        wellPanel(
+                                            style="margin-bottom:15px;",
+                                            style="height:100%;",
+                                            h4('Gene Visualizations'),
+                                            tabsetPanel(
+                                                tabPanel('Heatmaps',
+                                                    markdown('Heatmaps are another staple of RNA-seq analysis. These allow you to see individual genes across all samples based on their expression levels. 
+                                                        In this case, it can also include sample correlations based on hierarchal clustering. 
+                                                        '),
+                                                    actionButton('heatmap_example','Heatmap Example',class='btn btn-info',style="margin-top:15px;")
+                                                ),
+                                                tabPanel('Box Plots',
+                                                    markdown('Box plots enable visualization of individual genes across the selected groupings. This shows both the mean of the group, as well as the variance across samples within the group.
+                                                        '),
+                                                    actionButton('box_example','Box Plot Example',class='btn btn-info',style="margin-top:15px;")
+                                                ),
+                                                tabPanel('Violin Plots',
+                                                    markdown('Violin plots enable visualization of individual genes across the selected groupings. This is very similar to box plots, but for higher sample numbers can more accurately represent the variance by the width of the violin. 
+                                                        Note- this will not function for groups with less than 3 samples per group. 
+                                                        '),
+                                                    actionButton('violin_example','Violin Plot Example',class='btn btn-info',style="margin-top:15px;")
+                                                )
                                             )
                                         )
-                                    )
-                                ),
-                                column(6,
-                                    wellPanel(
-                                        style="margin-bottom:15px;",
-                                        style="height:300px;",
-                                        h4('Gene Visualizations'),
-                                        tabsetPanel(
-                                            tabPanel('Heatmaps',
-                                                markdown('Heatmaps are another staple of RNA-seq analysis. These allow you to see individual genes across all samples based on their expression levels. 
-                                                    In this case, it can also include sample correlations based on hierarchal clustering. 
-                                                    '),
-                                                actionButton('heatmap_example','Heatmap Example',class='btn btn-info',style="margin-top:15px;")
-                                            ),
-                                            tabPanel('Box Plots',
-                                                markdown('Box plots enable visualization of individual genes across the selected groupings. This shows both the mean of the group, as well as the variance across samples within the group.
-                                                    '),
-                                                actionButton('box_example','Box Plot Example',class='btn btn-info',style="margin-top:15px;")
-                                            ),
-                                            tabPanel('Violin Plots',
-                                                markdown('Violin plots enable visualization of individual genes across the selected groupings. This is very similar to box plots, but for higher sample numbers can more accurately represent the variance by the width of the violin. 
-                                                    Note- this will not function for groups with less than 3 samples per group. 
-                                                    '),
-                                                actionButton('violin_example','Violin Plot Example',class='btn btn-info',style="margin-top:15px;")
-                                            )
-                                        )
-                                    )
-                                ),
-                                column(6,
-                                    wellPanel(
-                                        style="margin-bottom:15px;",
-                                        style="height:300px;",
-                                        h4('Pathway Visualizations'),
-                                        tabsetPanel(
-                                            tabPanel('Dot Plots',
-                                                markdown('Dot Plots are an excellent visualization tool for GO/KEGG/MSigDB pathway visualization. These show the significant pathway alterations in Enrichment or Over Representation.
-                                                    Additionally, this can be viewed in ridge plots or barcharts. 
-                                                    '),
-                                                actionButton('dotplot_example','Dot Plot Example',class='btn btn-info',style="margin-top:15px;")
-                                            ),
-                                            tabPanel('Enrichment Maps',
-                                                markdown('Enrichment map plots are a useful tool fo visualizing the overlapping gene sets of various networks to more easily view functional outputs.
-                                                    '),
-                                                actionButton('enrich_example','Enrichment Plot Example',class='btn btn-info',style="margin-top:15px;")
-                                            ),
-                                            tabPanel('GSEA Plots',
-                                                markdown('GSEA plots are the classic enrichment plots for a single GSEA term. These show the balance of genes across the specific GSEA term.
-                                                    '),
-                                                actionButton('gsea_example','Violin Plot Example',class='btn btn-info',style="margin-top:15px;")
-                                            ),
-                                            tabPanel('Pathview Plots',
-                                                markdown('Pathview is an [incredible tool](https://bioconductor.org/packages/release/bioc/html/pathview.html) to visualize your comparison overlaid on a specific KEGG pathway.
-                                                    '),
-                                                actionButton('pathviewer_example','Violin Plot Example',class='btn btn-info',style="margin-top:15px;")
+                                    ),
+                                    column(6,
+                                        wellPanel(
+                                            style="margin-bottom:15px;",
+                                            style="height:100%;",
+                                            h4('Pathway Visualizations'),
+                                            tabsetPanel(
+                                                tabPanel('Dot Plots',
+                                                    markdown('Dot Plots are an excellent visualization tool for GO/KEGG/MSigDB pathway visualization. These show the significant pathway alterations in Enrichment or Over Representation.
+                                                        Additionally, this can be viewed in ridge plots or barcharts. 
+                                                        '),
+                                                    actionButton('dotplot_example','Dot Plot Example',class='btn btn-info',style="margin-top:15px;")
+                                                ),
+                                                tabPanel('Enrichment Maps',
+                                                    markdown('Enrichment map plots are a useful tool fo visualizing the overlapping gene sets of various networks to more easily view functional outputs.
+                                                        '),
+                                                    actionButton('enrich_example','Enrichment Plot Example',class='btn btn-info',style="margin-top:15px;")
+                                                ),
+                                                tabPanel('GSEA Plots',
+                                                    markdown('GSEA plots are the classic enrichment plots for a single GSEA term. These show the balance of genes across the specific GSEA term.
+                                                        '),
+                                                    actionButton('gsea_example','Violin Plot Example',class='btn btn-info',style="margin-top:15px;")
+                                                ),
+                                                tabPanel('Pathview Plots',
+                                                    markdown('Pathview is an [incredible tool](https://bioconductor.org/packages/release/bioc/html/pathview.html) to visualize your comparison overlaid on a specific KEGG pathway.
+                                                        '),
+                                                    actionButton('pathviewer_example','Violin Plot Example',class='btn btn-info',style="margin-top:15px;")
+                                                )
                                             )
                                         )
                                     )
