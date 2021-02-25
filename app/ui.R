@@ -303,8 +303,16 @@ tagList(tags$head(tags$style(type = 'text/css','.navbar-brand{display:none;}')),
                         ),
                     column(9,
                         tabsetPanel(id='Input Tables',
-                            tabPanel(title='Raw Counts', hr(), dataTableOutput('counts_contents')),
-                            tabPanel(title='Metadata', hr(), dataTableOutput('meta_contents'))
+                            tabPanel(title='Raw Counts', hr(), 
+                                withSpinner(type=6, color='#5bc0de',
+                                    dataTableOutput('counts_contents')
+                                )
+                            ),
+                            tabPanel(title='Metadata', hr(), 
+                                withSpinner(type=6, color='#5bc0de',
+                                    dataTableOutput('meta_contents')
+                                )
+                            )
                         )
                     )
                 )
