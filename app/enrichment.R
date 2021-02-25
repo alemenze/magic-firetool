@@ -545,7 +545,7 @@ KEGGReactiveORA <- eventReactive(input$MakePathviewORA, {
                 low=list(gene='blue',cpd='blue')
                 )
             file.copy(paste0(keggid,".pathview.png"),paste0("tempimage"))
-
+            TempValue$ImagePathORA=paste0(keggid,".pathview.png")
             return(list(
                 src = paste0("tempimage"),
                 filetype = "image/png",
@@ -559,3 +559,13 @@ observe({
         KEGGReactiveORA()
     }, deleteFile=TRUE)
 })
+
+output$DownloadGSEAORAPlot <- downloadHandler(
+    filename=function(){
+        TempValue$ImagePathORA
+    },
+    content=function(file){   
+        print(paste0(getwd(),'/',TempValue$ImagePathORA))
+        file.copy(paste0(getwd(),'/',TempValue$ImagePathORA), file)
+    }
+)

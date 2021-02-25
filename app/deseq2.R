@@ -52,8 +52,29 @@ DESeqReactive <- eventReactive(input$DESEQ2, {
 
 output$deseq_counts <- renderDataTable({
     DataIn <- DESeqReactive()$ddscounts
+
+    GeneTable <- subset(ProjectData$genestable, select=-c(Gene))
+    DataIn <- merge(as.data.frame(DataIn), as.data.frame(GeneTable), by="row.names", sort=FALSE)
+    DataIn <- DataIn %>% rename(Gene=Row.names)
+    DataIn <- DataIn %>% relocate(GeneID, .after = Gene)
+
     DT::datatable(DataIn, style = "bootstrap", options=list(pageLength = 15,scrollX=TRUE))
 })
+
+output$DownloadDESeqNorm <- downloadHandler(
+    filename=function(){
+        paste('NormalizedDESeqCounts.csv',sep='')
+    },
+    content = function(file){
+        DataIn <- DESeqReactive()$ddscounts
+
+        GeneTable <- subset(ProjectData$genestable, select=-c(Gene))
+        DataIn <- merge(as.data.frame(DataIn), as.data.frame(GeneTable), by="row.names", sort=FALSE)
+        DataIn <- DataIn %>% rename(Gene=Row.names)
+        DataIn <- DataIn %>% relocate(GeneID, .after = Gene)
+        write.csv(DataIn, file)
+    }
+)
 
 # Comparisons
 ############################################################################
@@ -92,6 +113,11 @@ CompareReactive <- eventReactive(input$Compare_groups, {
 
 output$comparison_temp <- renderDataTable({
     DataIn <- CompareReactive()$outcomparison
+
+    GeneTable <- ProjectData$genestable
+    DataIn <- merge(as.data.frame(DataIn), as.data.frame(GeneTable), by="Gene", sort=FALSE)
+    DataIn <- DataIn %>% relocate(GeneID, .after = Gene)
+
     DT::datatable(DataIn, style = "bootstrap", options=list(pageLength = 15,scrollX=TRUE))
 })
 
@@ -123,6 +149,11 @@ output$DownloadCompare <- downloadHandler(
         paste(CompareReactive()$compnames,'.csv',sep='')
     },
     content = function(file){
-        write.csv(CompareReactive()$outcomparison, file)
+        DataIn <- CompareReactive()$outcomparison
+
+        GeneTable <- ProjectData$genestable
+        DataIn <- merge(as.data.frame(DataIn), as.data.frame(GeneTable), by="Gene", sort=FALSE)
+        DataIn <- DataIn %>% relocate(GeneID, .after = Gene)
+        write.csv(DataIn, file)
     }
 )

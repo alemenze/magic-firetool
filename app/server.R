@@ -8,4 +8,5 @@ function(input, output, session) {
     source('geplots.R',local=TRUE)
     source('modals.R',local=TRUE)
     source('enrichment.R',local=TRUE)
+    source('tabmanagement.R',local=TRUE)
 }

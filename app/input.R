@@ -1,10 +1,10 @@
-ProjectData<- reactiveValues(datafile=NULL, metadatafile=NULL, design=NULL, species=NULL,dds=NULL)
+ProjectData<- reactiveValues()
 
 output$specieschoice <- renderUI({
     if (is.null(input$datafile) || is.null(input$metadatafile)) return()
     tagList(
         radioButtons("species",label='Select species',choices=c('Human','Mouse','Other'), inline=F, selected='Human'),
-        actionButton('submit',"Submit Data",class='btn btn-success',)
+        actionButton('submit',"Submit Data",class='btn btn-info',)
     )
 })
 
