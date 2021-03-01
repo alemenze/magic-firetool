@@ -22,7 +22,11 @@ library(msigdbr)
 library(stringr)
 library(pathview)
 
-tagList(tags$head(tags$style(type = 'text/css','.navbar-brand{display:none;}')),
+tagList(
+    tags$head(
+        includeHTML(("www/GA.html")),
+        tags$style(type = 'text/css','.navbar-brand{display:none;}')
+    ),
     fluidPage(theme = shinytheme('superhero'),
             windowTitle = "MaGIC FIRE-Tool",
             titlePanel(
@@ -31,7 +35,7 @@ tagList(tags$head(tags$style(type = 'text/css','.navbar-brand{display:none;}')),
                 column(12, h1(strong('MaGIC FIRE-Tool'), align = 'center')),
                 column(12, h2(strong('Fun Interactive RNA-Seq Expression Tool'), align = 'center'))
                 ),
-                windowTitle = "MaGIC RNA-Seq" ),
+                windowTitle = "MaGIC FIRE-Tool" ),
                 tags$style(type='text/css', '.navbar{font-size:20px;}'),
                 tags$style(type='text/css', '.nav-tabs{padding-bottom:20px;}'),
                 tags$head(tags$style(".modal-dialog{ width:1300px}")),
