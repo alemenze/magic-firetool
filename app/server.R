@@ -1,4 +1,5 @@
 function(input, output, session) {
+    options(shiny.maxRequestSize=30*1024^2)
     source('input.R',local=TRUE)
     source('deseq2.R', local=TRUE)
     source('clustering.R', local=TRUE)
