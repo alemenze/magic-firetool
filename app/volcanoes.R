@@ -11,7 +11,7 @@ static_volcano_plotter <- reactive({
     for (item in DataSetIn){
         outlist <- c(outlist, item[1])
     }
-    index=grep(input$VolComp,outlist)
+    index=grep(paste("^",input$VolComp,"$",sep=''),outlist)
 
     DataSet=DataSetIn[[index]][[2]]
     DataSet <- merge(as.data.frame(DataSet), as.data.frame(ProjectData$genestable), by="Gene", sort=FALSE)

@@ -22,7 +22,7 @@ static_venn_plotter <- reactive({
         for (item in DataSetIn){
             outlist <- c(outlist, item[1])
         }
-        index=grep(list_choice,outlist)
+        index=grep(paste("^",list_choice,"$",sep=''),outlist)
 
         DataSet=DataSetIn[[index]][[2]]
 
@@ -136,7 +136,7 @@ upset_plotter <- reactive({
         for (item in DataSetIn){
             outlist <- c(outlist, item[1])
         }
-        index=grep(list_choice,outlist)
+        index=grep(paste("^",list_choice,"$",sep=''),outlist)
 
         DataSet=DataSetIn[[index]][[2]]
 

@@ -36,7 +36,7 @@ GSEAReactive <- reactive({
             for (item in DataSetIn){
                 outlist <- c(outlist, item[1])
             }
-            index=grep(input$EnrichComp,outlist)
+            index=grep(paste("^",input$EnrichComp,"$",sep=''),outlist)
 
             DataSet=DataSetIn[[index]][[2]]
 
@@ -209,7 +209,7 @@ ORAReactive <- reactive({
             for (item in DataSetIn){
                 outlist <- c(outlist, item[1])
             }
-            index=grep(input$EnrichComp,outlist)
+            index=grep(paste("^",input$EnrichComp,"$",sep=''),outlist)
 
             DataSet=DataSetIn[[index]][[2]]
 
@@ -420,7 +420,7 @@ KEGGReactiveGSEA <- eventReactive(input$MakePathviewGSEA, {
             for (item in DataSetIn){
                 outlist <- c(outlist, item[1])
             }
-            index=grep(input$EnrichComp,outlist)
+            index=grep(paste("^",input$EnrichComp,"$",sep=''),outlist)
 
             DataSet=DataSetIn[[index]][[2]]
 
@@ -513,7 +513,7 @@ KEGGReactiveORA <- eventReactive(input$MakePathviewORA, {
             for (item in DataSetIn){
                 outlist <- c(outlist, item[1])
             }
-            index=grep(input$EnrichComp,outlist)
+            index=grep(paste("^",input$EnrichComp,"$",sep=''),outlist)
 
             DataSet=DataSetIn[[index]][[2]]
 
